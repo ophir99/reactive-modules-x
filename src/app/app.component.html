@@ -49,7 +49,7 @@
           <textarea
             name=""
             id=""
-            cols="30"
+            cols="10"
             rows="10"
             formControlName="address"
           ></textarea>
@@ -63,6 +63,42 @@
         <tr>
           <td>Father</td>
           <td><input type="text" formControlName="father" /></td>
+        </tr>
+      </ng-container>
+      <tr>
+        <td></td>
+        <td><button (click)="pushHabitControls()">+</button></td>
+      </tr>
+      <ng-container formArrayName="habits">
+        <tr
+          *ngFor="
+            let x of userRegistrationForm.get('habits').controls;
+            let ind = index
+          "
+        >
+          <td>Skill {{ ind + 1 }}</td>
+          <td><input type="text" [formControlName]="ind" /></td>
+          <td><button (click)="removeHabitFormControl(ind)">X</button></td>
+        </tr>
+      </ng-container>
+      <tr>
+        <td>Add Edu Details</td>
+        <td><button (click)="addEducationDetailsFG()">+</button></td>
+      </tr>
+      <ng-container formArrayName="eduDetails">
+        <tr
+          [formGroupName]="i"
+          *ngFor="
+            let y of userRegistrationForm.get('eduDetails').controls;
+            let i = index
+          "
+        >
+          <td><input type="text" formControlName="course_name" /></td>
+          <td><input type="text" formControlName="institution" /></td>
+          <td><input type="text" formControlName="yearOfStarting" /></td>
+          <td><input type="text" formControlName="yearOfE" /></td>
+          <td><input type="text" formControlName="aggregate" /></td>
+          <td><button>X</button></td>
         </tr>
       </ng-container>
     </tbody>

@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, FormArray } from "@angular/forms";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -21,7 +21,29 @@ export class AppComponent {
       parents: new FormGroup({
         mother: new FormControl(),
         father: new FormControl()
-      })
+      }),
+      habits: new FormArray([]),
+      eduDetails: new FormArray([])
     });
+  }
+
+  pushHabitControls() {
+    const fc = new FormControl();
+    this.userRegistrationForm.get("habits").push(fc);
+  }
+
+  removeHabitFormControl(index) {
+    this.userRegistrationForm.get("habits").removeAt(index);
+  }
+  addEducationDetailsFG() {
+    const eduFG = new FormGroup({
+      course_name: new FormControl(),
+      institution: new FormControl(),
+      yearOfStarting: new FormControl(),
+      yearOfE: new FormControl(),
+      aggregate: new FormControl()
+    });
+
+    this.userRegistrationForm.get("eduDetails").push(eduFG);
   }
 }
